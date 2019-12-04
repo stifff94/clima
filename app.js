@@ -1,23 +1,18 @@
-const axios = require('axios')
-
+const axios = require('axios');
+// const clima = require('./controlador/clima');
 const argv = require('yargs').options({
-    nombre: {
-        alias: "n",
-        desc: "nombre ciudad para obtener clima",
+    nombre:{
+        alias: 'n',
+        desc: 'Nombre de ka ciudad para obtener el clima',
         demand: true
     }
-
 }).argv;
 
-const ciudad = encodeURI(argv.nombre)
-const instance = axios.create({
-    baseURL: `https://devru-latitude-longitude-find-v1.p.rapidapi.com/latlon.php?location=${ciudad}`,
-    headers: { "X-RapidAPI-Key": "ea164cc3admshce81769bb029b06p1d2f9ejsn57543c2faebd" }
-});
-
-instance.get()
-    .then(resp => {
-        console.log(resp.data.Results[0])
-    }).catch(err => {
-        console.log("ERROR:", err)
-    })
+const info = require('./controlador/info');
+// const ubicacion = require('./controlador/ubicacion');
+//  ubicacion.getCiudadLatLon(argv.nombre)
+//      .then(console.log);
+// clima.getClima(-0.19,-78.5)
+//     .then(console.log);
+info.getInfo(argv.nombre)
+    .then(console.log);
